@@ -1,24 +1,39 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 import Button from './components/button';
+import { actions } from './actions/counter';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          <Button action={() => console.log('hello')}>hello</Button>
-          <br />
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+const App = ({counter, increment, decrement}) => {
+  return (
+    <div className="App">
+      <div className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <h2>Welcome to React</h2>
       </div>
-    );
-  }
+      <p className="App-intro">
+        <Button action={increment}>increment</Button>
+        <br />
+        <Button action={decrement}>decrement</Button>
+        <br />
+        Score is {counter}
+      </p>
+    </div>
+  )
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    counter: state.counter,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+ return {
+   increment: () => { dispatch(actions.increment()); },
+   decrement: () => { dispatch(actions.decrement()); },
+ };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
