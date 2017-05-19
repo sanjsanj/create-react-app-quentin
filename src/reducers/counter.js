@@ -8,6 +8,8 @@ export default (state = initialState, action) => {
       return state + 1;
     case types.DECREMENT:
       return state - 1;
+    case types.RESET:
+      return 0;
     default:
       return state;
   }

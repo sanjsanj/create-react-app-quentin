@@ -1,6 +1,8 @@
 export const types = {
   INCREMENT: "COUNTER_INCREMENT",
-  DECREMENT: "COUNTER_DECREMENT"
+  DECREMENT: "COUNTER_DECREMENT",
+  RESET: "COUNTER_RESET",
+  INCREMENT_BY: ""
 }
 
 export const actions = {
@@ -9,5 +11,8 @@ export const actions = {
   },
   decrement() {
     return {type: types.DECREMENT};
+  },
+  reset() {
+    return {type: types.RESET};
   },
 };

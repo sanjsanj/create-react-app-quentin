@@ -12,7 +12,7 @@ describe('Button', () => {
     const fn = jest.fn();
     const component = shallow(<Button action={fn}>hello</Button>);
     expect(fn.mock.calls.length).toBe(0);
-    component.simulate('click');
+    component.find('button').simulate('click');
     expect(fn.mock.calls.length).toBe(1);    
   })
 })

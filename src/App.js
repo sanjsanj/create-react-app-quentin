@@ -1,24 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import logo from './logo.svg';
 import './App.css';
 import Button from './components/button';
-import { actions } from './actions/counter';
+import ProgressBar from './components/progressbar';
+import { actions as counterActions } from './actions/counter';
+import { actions as postsActions } from './actions/posts';
+import PostSection from './sections/posts';
 
-const App = ({counter, increment, decrement}) => {
+const App = ({counter, increment, decrement, reset, posts, create}) => {
   return (
     <div className="App">
       <div className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h2>Welcome to React</h2>
       </div>
-      <p className="App-intro">
+      <div className="App-intro">
         <Button action={increment}>increment</Button>
-        <br />
         <Button action={decrement}>decrement</Button>
-        <br />
+        <Button action={reset}>reset</Button>
         Score is {counter}
-      </p>
+      </div>
+      <ProgressBar counter={counter} />
+      <PostSection create={create} posts={posts} />
     </div>
   )
 }
@@ -26,14 +30,17 @@ const App = ({counter, increment, decrement}) => {
 const mapStateToProps = (state) => {
   return {
     counter: state.counter,
-  };
-};
+    posts: state.posts,
+  }
+}
 
 const mapDispatchToProps = (dispatch) => {
  return {
-   increment: () => { dispatch(actions.increment()); },
-   decrement: () => { dispatch(actions.decrement()); },
- };
-};
+   increment: () => { dispatch(counterActions.increment()); },
+   decrement: () => { dispatch(counterActions.decrement()); },
+   reset: () => { dispatch(counterActions.reset()); },
+   create: (message, author) => { dispatch(postsActions.create(message, author)); }
+ }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 export default ({ children, action }) => {
   return(
-    <button onClick={action}>{children}</button>
+    <div>
+      <button onClick={action}>{children}</button>
+    </div>
   )
 }
